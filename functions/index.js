@@ -2,7 +2,7 @@ const functions = require("firebase-functions");
 const { ApolloServer } = require('apollo-server-cloud-functions');
 const { ApolloServerPluginLandingPageLocalDefault } = require('apollo-server-core');
 const typeDefs = require("./graphql/typeDefs");
-const resolvers = require("./graphql/resolvers");
+const Resolvers = require("./graphql/resolvers");
 const admin = require("firebase-admin");
 require('dotenv').config();
 
@@ -16,6 +16,9 @@ const config = {
   databaseURL: process.env.PROJECT_URL,
 }
 admin.initializeApp(config);
+
+const ResolversObj = new Resolvers(admin.database());
+const resolvers = ResolversObj.resolvers;
 
 const server = new ApolloServer({
   typeDefs,

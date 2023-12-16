@@ -4,7 +4,7 @@ const typeDefs =`
   }
 
   type Query {
-    getName: Data
+    getName: String
     hello: String
   }
 

@@ -1,22 +1,26 @@
+class Resolvers {
+  constructor(db) {
+    this.db = db;
 
+    this.resolvers = {
+      Query: {
+        getName: async () => {
+          const snapshot = await this.db.ref("tester1/name").once('value');
+          const name = snapshot.val();
+          return name;
+        },
+        hello: () => 'Hello world!',
+      },
 
-const resolvers = {
-  Query: {
-    getName: async () => {
-      console.log("@getname");
+      Mutation: {
+        setName: async (parent, args) => {
+          console.log("@setName");
 
-      return ""
-    },
-    hello: () => 'Hello world!',
-  },
-
-  Mutation: {
-    setName: async (parent, args) => {
-      console.log("@setName");
-
-      return ""
-    },
+          return "";
+        },
+      }
+    };
   }
-};
+}
 
-module.exports = resolvers;
+module.exports = Resolvers;
