@@ -26,21 +26,29 @@ First, have Node installed on your computer so you can use `npm` commands.
 
 I setup React with the `npm create vite@latest` command. After typing in a project name, I selected `React` for my framework, and finally I chose `JavaScript` (**not** JavaScript + SWC in my case).
 
+talk about packages I used
+
 ### Connect to Firebase
 
-
+Going to firebase website
 
 ### Deploy to Firebase Hosting
 
-
+after creating a firebase project, follow the instructions to add a website
 
 ### Setup Firebase Function with GraphQL
 
+show file structure.
 
+apollo website help and youtube video.
+
+break down Resolver class
 
 ### Connect React to GraphQL
 
+Using `@apollo/client` package for gql hooks
 
+Setting the firebase function url to the apollo client uri
 
 ## Learning Points
 
