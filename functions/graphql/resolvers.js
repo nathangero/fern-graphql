@@ -1,3 +1,7 @@
+/**
+ * This class exists so the index.js can import this, and allow passing in access to the realtime database.
+ * The main purpose is to be more organized with the code
+ */
 class Resolvers {
   constructor(db) {
     this.db = db;

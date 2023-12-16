@@ -9,8 +9,7 @@ import './App.css'
 
 
 const client = new ApolloClient({
-  uri: '/graphql',
-  // uri: '/graphql',
+  uri: 'https://us-central1-fern-graphql-tester.cloudfunctions.net/graphql',
   cache: new InMemoryCache(),
 });
 
