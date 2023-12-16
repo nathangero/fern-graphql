@@ -9,8 +9,8 @@ export default defineConfig({
     open: true,
     proxy: {
       '/graphql': {
-        target: 'http://localhost:3001',
-        secure: false,
+        target: 'https://fern-graphql-tester.firebaseapp.com',
+        secure: true,
         changeOrigin: true
       }
     }
