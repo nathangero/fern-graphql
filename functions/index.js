@@ -1,23 +1,29 @@
 const functions = require("firebase-functions");
-const express = require('express');
-const { ApolloServer } = require('@apollo/server');
-const { expressMiddleware } = require('@apollo/server/express4');
+const { ApolloServer } = require('apollo-server-cloud-functions');
+const { ApolloServerPluginLandingPageLocalDefault } = require('apollo-server-core');
 const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers");
+const admin = require("firebase-admin");
+require('dotenv').config();
 
-const server = new ApolloServer({ typeDefs, resolvers });
-const app = express();
-app.use('/graphql', expressMiddleware(server, {
-  // context: authMiddleware // TODO? authMiddleware could be linked to firebase auth
-}));
+const serviceAccount = require("./fern-graphql-tester-service.js")
 
-exports.graphql = functions.https.onRequest(app);
+const config = {
+  credential: admin.credential.cert(serviceAccount),
+  apiKey: process.env.PROJECT_KEY,
+  projectId: process.env.PROJECT_ID,
+  authDomain: process.env.PROJECT_DOMAIN,
+  databaseURL: process.env.PROJECT_URL,
+}
+admin.initializeApp(config);
 
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  csrfPrevention: true,
+  cache: 'bounded',
+  plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
+});
 
-// // Create and deploy your first functions
-// // https://firebase.google.com/docs/functions/get-started
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+// Must call server.createHandler() inside of functions.https.onRequest() to work
+exports.graphql = functions.https.onRequest(server.createHandler());

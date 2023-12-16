@@ -1,10 +1,13 @@
+
+
 const resolvers = {
   Query: {
     getName: async () => {
       console.log("@getname");
 
       return ""
-    }
+    },
+    hello: () => 'Hello world!',
   },
 
   Mutation: {
@@ -12,7 +15,7 @@ const resolvers = {
       console.log("@setName");
 
       return ""
-    }
+    },
   }
 };
 

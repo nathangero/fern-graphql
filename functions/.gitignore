@@ -1,1 +1,4 @@
 node_modules/
+.env
+fern-graphql-tester-service.json
+fern-graphql-tester-service.js

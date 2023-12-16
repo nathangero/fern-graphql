@@ -1,14 +1,15 @@
 const typeDefs =`
   type Data {
-    name
+    name: String
   }
 
-  Query {
+  type Query {
     getName: Data
+    hello: String
   }
 
-  Mutation {
-    setName(): Data
+  type Mutation {
+    setName(newName: String!): Data
   }
 `;
 

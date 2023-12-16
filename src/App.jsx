@@ -9,7 +9,7 @@ import './App.css'
 
 
 const client = new ApolloClient({
-  uri: 'https://fern-graphql-tester.firebaseapp.com/graphql',
+  uri: '/graphql',
   // uri: '/graphql',
   cache: new InMemoryCache(),
 });
